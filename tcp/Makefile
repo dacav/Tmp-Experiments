@@ -2,6 +2,8 @@
 
 APPS := pingpong select-on-socket
 
+CFLAGS := #-DBLOCKING
+
 all: $(APPS)
 
 clean:
