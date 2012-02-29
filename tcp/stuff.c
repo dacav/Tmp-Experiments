@@ -30,7 +30,7 @@ int tcp_serve (sock_data_t *sd, int backlog, int *e)
 {
     int fd;
 
-    fd = socket(AF_INET, SOCK_STREAM, 0);
+    fd = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0);
     if (fd == -1) {
         if (e) *e = errno;
         return -1;
