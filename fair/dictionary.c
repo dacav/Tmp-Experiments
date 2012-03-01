@@ -29,9 +29,6 @@
 
 #include "dictionary.h"
 
-#if 0
-/* WORK IN PROGRESS!!! */
-
 // Arbitrary and reasonable(?) prime number.
 static const unsigned DEFAULT_N_BUCKETS = 23;
 
@@ -67,19 +64,26 @@ dict_t dict_new (int af)
 
 void dict_delete (dict_t D)
 {
+    dhash_free(D->ht, free, NULL);
+    free(D);
 }
 
 int dict_lookup (dict_t D, const struct sockaddr * addr, int *fd)
 {
+    return dhash_search(D->ht, (const void *)addr, (void **) &fd)
+           == DHASH_FOUND ? 0 : 1;
 }
 
 int dict_insert (dict_t D, const struct sockaddr * addr, int fd)
+{
+    
+}
+
+int dict_insert (dict_t D, const struct sockaddr * addr)
 {
 }
 
 void dict_scan (dict_t D, void *ctx, dict_scancb_t cback)
 {
 }
-
-#endif
 
