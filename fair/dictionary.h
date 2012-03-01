@@ -95,6 +95,13 @@ int dict_lookup (dict_t D, const struct sockaddr * addr, int *fd);
  */
 int dict_insert (dict_t D, const struct sockaddr * addr, int fd);
 
+/** Remotion function.
+ *
+ * @param[in] D The dictionary;
+ * @param[in] addr The address to be removed;
+ */
+int dict_insert (dict_t D, const struct sockaddr * addr);
+
 /** Callback for dictionary looping.
  *
  * Provide a function complying with this type in order to scan a
