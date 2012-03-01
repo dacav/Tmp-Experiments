@@ -92,6 +92,9 @@ int dict_lookup (dict_t D, const struct sockaddr * addr, int *fd);
  * @param[in] D The dictionary;
  * @param[in] addr The address to map;
  * @param[in] fd The file descriptor to be mapped on the address.
+ *
+ * @retval 1 if the value has been replaced;
+ * @retval 0 otherwise. 
  */
 int dict_insert (dict_t D, const struct sockaddr * addr, int fd);
 
@@ -100,7 +103,7 @@ int dict_insert (dict_t D, const struct sockaddr * addr, int fd);
  * @param[in] D The dictionary;
  * @param[in] addr The address to be removed;
  */
-int dict_insert (dict_t D, const struct sockaddr * addr);
+int dict_remove (dict_t D, const struct sockaddr * addr);
 
 /** Callback for dictionary looping.
  *
