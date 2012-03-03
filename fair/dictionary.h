@@ -83,18 +83,20 @@ void dict_delete (dict_t D);
  * @param[out] fd The file descriptor (valid only if 0 is returned);
  *
  * @retval 0 on success;
- * @retval 1 on failure.
+ * @retval -1 on failure.
  */
 int dict_lookup (dict_t D, const struct sockaddr * addr, int *fd);
 
 /** Insertion function.
  *
+ * Items gets replaced when you overwrite them.
+ *
  * @param[in] D The dictionary;
  * @param[in] addr The address to map;
  * @param[in] fd The file descriptor to be mapped on the address.
  *
- * @retval 1 if the value has been replaced;
- * @retval 0 otherwise. 
+ * @retval 0 on insertion;
+ * @retval 1 on overwrite of an old value.
  */
 int dict_insert (dict_t D, const struct sockaddr * addr, int fd);
 
@@ -102,26 +104,33 @@ int dict_insert (dict_t D, const struct sockaddr * addr, int fd);
  *
  * @param[in] D The dictionary;
  * @param[in] addr The address to be removed;
+ *
+ * @retval 0 on success;
+ * @retval -1 on failure (no such item).
  */
 int dict_remove (dict_t D, const struct sockaddr * addr);
 
 /** Callback for dictionary looping.
  *
  * Provide a function complying with this type in order to scan a
- * dictionary. Note that this function will be parametrized with pointers
- * to the internally stored data, so you may use it to modify them.
+ * dictionary.
  *
  * @warning If that's not intuitively clear, try not to modify the
  *          dictionary while you are looping on it, please...
  *
  * @param[in] ctx The user context argument;
- * @param[in,out] addr The address;
- * @param[in,out] fd The file descriptor.
+ * @param[in] addr The address;
+ * @param[in] fd The file descriptor (you may change it).
+ *
+ * @retval 0 to stop the iteration;
+ * @retval 1 to continue the iteration;
+ * @retval 2 to delete the read value and stop the iteration;
+ * @retval 3 to delete the read and continue the iteration.
  *
  * @see dict_scan
  */
-typedef int (* dict_scancb_t) (void *ctx, struct sockaddr **addr,
-                               int *fd);
+typedef int (* dict_scancb_t) (void *ctx, const struct sockaddr *addr,
+                               int fd);
 
 /** Implementation-agnostic scanning procedure for the dictionary.
  *

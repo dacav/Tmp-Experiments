@@ -8,4 +8,5 @@ clean:
 	rm -f $(APPS)
 	rm -f *.o
 
-dict-test: dict-test.o dictionary.o
+dict-test: dict-test.o dictionary.o stuff.o
+	$(CC) -ldacav $^ -o $@

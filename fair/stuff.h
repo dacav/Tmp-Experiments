@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2012 Giovanni Simoni
+ * Copyright (c) 2012 Giovanni Simoni, Arber Fama
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and associated documentation files (the
@@ -25,7 +25,6 @@
 #ifndef __defined_stuff_h
 #define __defined_stuff_h
 
-#define _POSIX_C_SOURCE 200112L
 #define _XOPEN_SOURCE 600
 #undef  _GNU_SOURCE
 
@@ -78,6 +77,9 @@ const char * sock_data_ipstring (const sock_data_t *s, char * strrep)
     return inet_ntop(AF_INET, (const void *) &s->addr.sin_addr, strrep,
                      INET_ADDRSTRLEN);
 }
+
+int tcp_connect (sock_data_t *sd, int *e);
+int tcp_serve (sock_data_t *sd, int backlog, int *e);
 
 #endif // __defined_stuff_h
 
