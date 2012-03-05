@@ -23,6 +23,8 @@
 
 #include "stuff.h"
 
+#include <sys/select.h>
+
 /* -- Internal functions ---------------------------------------------- */
 
 int tcp_connect (sock_data_t *sd, int *e);
@@ -51,6 +53,16 @@ static sock_data_t server ()
     return serv;
 }
 
+static void wait_for_it (int fd)
+{
+    fd_set S;
+
+    FD_SET(fd, &S);
+    fprintf(stderr, "Waiting (possibly forver)...");
+    select(fd + 1, &S, NULL, NULL, NULL);
+    fprintf(stderr, "Ok, we got it!");
+}
+
 static void is_incoming (sock_data_t *srv)
 {
     char buffer[BUFLEN];
@@ -61,6 +73,7 @@ static void is_incoming (sock_data_t *srv)
         socklen_t addrlen = sizeof(struct sockaddr_in);
 
         sleep(1);
+        wait_for_it(fd);
         clnt.fd = accept(fd, (struct sockaddr *)&clnt.addr,
                          &addrlen);
         if (clnt.fd == -1) {

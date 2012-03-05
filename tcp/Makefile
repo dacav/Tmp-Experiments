@@ -11,4 +11,7 @@ clean:
 	rm -f *.o
 
 pingpong: pingpong.o stuff.o
+
+accept-on-socket: accept-on-socket.o stuff.o
+
 select-on-socket: select-on-socket.o stuff.o
