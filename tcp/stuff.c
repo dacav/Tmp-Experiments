@@ -31,8 +31,10 @@ int tcp_serve (sock_data_t *sd, int backlog, int *e)
     int fd;
 
 #ifndef BLOCKING
+#   warning Compiling with non-blocking socket
     fd = socket(AF_INET, SOCK_STREAM | SOCK_NONBLOCK, 0);
 #else
+#   warning Compiling with blocking socket
     fd = socket(AF_INET, SOCK_STREAM, 0);
 #endif
     if (fd == -1) {
