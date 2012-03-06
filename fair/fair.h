@@ -22,8 +22,9 @@
  *           invalid);
  * @retval -1 On select error.
  */
-int fair_select(dick_t *neighbours, int *peer_fd, sockaddr_t *peer_addr,
-                struct timeval *timeout, int *e)
+int fair_select(dict_t neighbours, int *peer_fd,
+                const struct sockaddr **peer_addr,
+                struct timeval *timeout, int *e);
 
 #endif // FAIR_H
 
