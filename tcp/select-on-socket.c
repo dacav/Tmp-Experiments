@@ -53,6 +53,7 @@ static sock_data_t server ()
     return serv;
 }
 
+<<<<<<< HEAD
 static void wait_for_it (int fd)
 {
     fd_set S;
@@ -63,6 +64,8 @@ static void wait_for_it (int fd)
     fprintf(stderr, "Ok, we got it!");
 }
 
+=======
+>>>>>>> ea3268c... start
 static void is_incoming (sock_data_t *srv)
 {
     char buffer[BUFLEN];
@@ -73,7 +76,10 @@ static void is_incoming (sock_data_t *srv)
         socklen_t addrlen = sizeof(struct sockaddr_in);
 
         sleep(1);
+<<<<<<< HEAD
         wait_for_it(fd);
+=======
+>>>>>>> ea3268c... start
         clnt.fd = accept(fd, (struct sockaddr *)&clnt.addr,
                          &addrlen);
         if (clnt.fd == -1) {

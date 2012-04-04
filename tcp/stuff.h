@@ -25,10 +25,6 @@
 #ifndef __defined_stuff_h
 #define __defined_stuff_h
 
-#define _POSIX_C_SOURCE 200112L
-#define _XOPEN_SOURCE 600
-#undef  _GNU_SOURCE
-
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>

@@ -51,7 +51,7 @@ int main (int argc, char *argv[])
             fprintf(stderr, "Work in progress... (%i)\n", i ++);
             usleep(500000);
         } else {
-            fprintf(stderr, "Sent %li\n", aio_return(&aio_info));
+            fprintf(stderr, "Sent %li\n", (long int)aio_return(&aio_info));
             run = 0;
         }
     }
